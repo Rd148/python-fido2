@@ -594,6 +594,7 @@ class AuthenticatorAssertionResponse(_CamelCaseDataObject):
     authenticator_data: AuthenticatorData = field(metadata=_b64_metadata)
     signature: bytes = field(metadata=_b64_metadata)
     user_handle: Optional[bytes] = field(metadata=_b64_metadata, default=None)
+    cred_params_hash: Optional[bytes] = field(metadata=_b64_metadata, default=None)
     credential_id: Optional[bytes] = field(metadata=_b64_metadata, default=None)
     extension_results: Optional[Mapping[str, Any]] = None
 

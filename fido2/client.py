@@ -204,12 +204,13 @@ class AssertionSelection:
         assertion = self._assertions[index]
 
         return AuthenticatorAssertionResponse(
-            self._client_data,
-            assertion.auth_data,
-            assertion.signature,
-            assertion.user["id"] if assertion.user else None,
-            assertion.credential["id"] if assertion.credential else None,
-            self._get_extension_results(assertion),
+            client_data=self._client_data,
+            authenticator_data=assertion.auth_data,
+            signature=assertion.signature,
+            user_handle=assertion.user["id"] if assertion.user else None,
+            cred_params_hash=assertion.cred_params_hash,
+            credential_id=assertion.credential["id"] if assertion.credential else None,
+            extension_results=self._get_extension_results(assertion),
         )
 
 

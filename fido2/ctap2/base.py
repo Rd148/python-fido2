@@ -133,6 +133,7 @@ class AssertionResponse(_CborDataObject):
     :ivar user: The user data of the credential.
     :ivar number_of_credentials: The total number of responses available
         (only set for the first response, if > 1).
+    :ivar cred_params_hash: Optional hash of pubKeyCredParams returned by the authenticator.
     """
 
     credential: Dict[str, Any]
@@ -142,6 +143,7 @@ class AssertionResponse(_CborDataObject):
     number_of_credentials: Optional[int] = None
     user_selected: Optional[bool] = None
     large_blob_key: Optional[bytes] = None
+    cred_params_hash: Optional[bytes] = None
 
     def verify(self, client_param: bytes, public_key: CoseKey):
         """Verify the digital signature of the response with regard to the
