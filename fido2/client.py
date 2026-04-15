@@ -371,9 +371,11 @@ class _Ctap1ClientBackend(_ClientBackend):
             ),
         )
         return AuthenticatorAttestationResponse(
-            client_data,
-            AttestationObject.create(att_obj.fmt, att_obj.auth_data, att_obj.att_stmt),
-            {},
+            client_data=client_data,
+            attestation_object=AttestationObject.create(
+                att_obj.fmt, att_obj.auth_data, att_obj.att_stmt
+            ),
+            extension_results={},
         )
 
     def do_get_assertion(
@@ -630,9 +632,12 @@ class _Ctap2ClientBackend(_ClientBackend):
             raise ClientError.ERR.CONFIGURATION_UNSUPPORTED(e)
 
         return AuthenticatorAttestationResponse(
-            client_data,
-            AttestationObject.create(att_obj.fmt, att_obj.auth_data, att_obj.att_stmt),
-            extension_outputs,
+            client_data=client_data,
+            attestation_object=AttestationObject.create(
+                att_obj.fmt, att_obj.auth_data, att_obj.att_stmt
+            ),
+            cred_params_hash=att_obj.cred_params_hash,
+            extension_results=extension_outputs,
         )
 
     def do_get_assertion(
@@ -936,7 +941,9 @@ class WindowsClient(WebAuthnClient, _BaseClient):
 
         logger.info("New credential registered")
         return AuthenticatorAttestationResponse(
-            client_data, AttestationObject(result), {}
+            client_data=client_data,
+            attestation_object=AttestationObject(result),
+            extension_results={},
         )
 
     def get_assertion(self, options, **kwargs):

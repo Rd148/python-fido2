@@ -567,6 +567,7 @@ class AuthenticatorAttestationResponse(_CamelCaseDataObject):
         )
     )
     attestation_object: AttestationObject = field(metadata=_b64_metadata)
+    cred_params_hash: Optional[bytes] = field(metadata=_b64_metadata, default=None)
     extension_results: Optional[Mapping[str, Any]] = None
 
     def __getitem__(self, key):

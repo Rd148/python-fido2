@@ -113,6 +113,7 @@ class AttestationResponse(_CborDataObject):
     :type auth_data: AuthenticatorData
     :ivar att_stmt: The attestation statement.
     :type att_stmt: Dict[str, Any]
+    :ivar cred_params_hash: Optional hash of pubKeyCredParams returned by the authenticator.
     """
 
     fmt: str
@@ -120,6 +121,7 @@ class AttestationResponse(_CborDataObject):
     att_stmt: Dict[str, Any]
     ep_att: Optional[bool] = None
     large_blob_key: Optional[bytes] = None
+    cred_params_hash: Optional[bytes] = None
 
 
 @dataclass(eq=False, frozen=True)
